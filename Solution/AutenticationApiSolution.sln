@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutenticationApiSolution", "AutenticationApiSolution\AutenticationApiSolution.csproj", "{FDBE8462-7B86-4081-9737-1503BD10C3A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationApiSolution", "AutenticationApiSolution\AuthenticationApiSolution.csproj", "{FDBE8462-7B86-4081-9737-1503BD10C3A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

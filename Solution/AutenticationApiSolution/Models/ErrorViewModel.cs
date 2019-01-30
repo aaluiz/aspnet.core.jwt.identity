@@ -1,6 +1,6 @@
 using System;
 
-namespace AutenticationApiSolution.Models
+namespace AuthenticationApiSolution.Models
 {
     public class ErrorViewModel
     {

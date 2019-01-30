@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using AutenticationApiSolution.Models;
+using AuthenticationApiSolution.Models;
 
-namespace AutenticationApiSolution.Controllers
+namespace AuthenticationApiSolution.Controllers
 {
     public class HomeController : Controller
     {
