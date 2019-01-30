@@ -2,7 +2,7 @@
 Projeto Básico para Segurança para APIs
 
 ## Tecnologia
-* Asp.net Core 2.0
+* Asp.net Core 2.1
 * JWT
 * Identity Core
 
