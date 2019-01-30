@@ -28,14 +28,14 @@ namespace AuthenticationApiSolution.Data
         {
             if (_context.Database.EnsureCreated())
             {
-                if (!_roleManager.RoleExistsAsync(Roles.ROLE_API_ALTURAS).Result)
+                if (!_roleManager.RoleExistsAsync(Roles.ROLE_API).Result)
                 {
                     var resultado = _roleManager.CreateAsync(
-                        new IdentityRole(Roles.ROLE_API_ALTURAS)).Result;
+                        new IdentityRole(Roles.ROLE_API)).Result;
                     if (!resultado.Succeeded)
                     {
                         throw new Exception(
-                            $"Erro durante a criação da role {Roles.ROLE_API_ALTURAS}.");
+                            $"Erro durante a criação da role {Roles.ROLE_API}.");
                     }
                 }
 
@@ -45,7 +45,7 @@ namespace AuthenticationApiSolution.Data
                         UserName = "admin",
                         Email = "alan.luiz@creasp.org.br",
                         EmailConfirmed = true
-                    }, "Funck-Phenomena2019", Roles.ROLE_API_ALTURAS);
+                    }, "Funck-Phenomena2019", Roles.ROLE_API);
 
                 CreateUser(
                     new ApplicationUser()

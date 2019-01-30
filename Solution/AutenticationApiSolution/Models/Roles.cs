@@ -7,6 +7,6 @@ namespace AuthenticationApiSolution.Models
 {
     public static class Roles
     {
-        public const string ROLE_API_ALTURAS = "Acesso-APIAlturas";
+        public const string ROLE_API = "Acesso";
     }
 }
