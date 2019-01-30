@@ -63,7 +63,7 @@ namespace AuthenticationApiSolution.Controllers
 
                 DateTime dataCriacao = DateTime.Now;
                 DateTime dataExpiracao = dataCriacao +
-                    TimeSpan.FromSeconds(tokenConfigurations.Seconds);
+                    TimeSpan.FromSeconds(tokenConfigurations.Seconds + 120);
 
                 var handler = new JwtSecurityTokenHandler();
                 var securityToken = handler.CreateToken(new SecurityTokenDescriptor

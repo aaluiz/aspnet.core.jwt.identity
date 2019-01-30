@@ -41,8 +41,7 @@ namespace AuthenticationApiSolution
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
             // Ativando a utilização do ASP.NET Identity, a fim de
             // permitir a recuperação de seus objetos via injeção de
