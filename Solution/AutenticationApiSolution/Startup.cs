@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
+
 namespace AuthenticationApiSolution
 {
     public class Startup
@@ -42,6 +43,7 @@ namespace AuthenticationApiSolution
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
 
 
             // Ativando a utilização do ASP.NET Identity, a fim de
@@ -84,7 +86,7 @@ namespace AuthenticationApiSolution
                 paramsValidation.ClockSkew = TimeSpan.Zero;
             }).AddCookie(options =>
             {
-                options.LoginPath = "Identity/Account/Login";
+                options.LoginPath = "/auth/signin";
             })
             
             
@@ -97,6 +99,9 @@ namespace AuthenticationApiSolution
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
+
+
+           
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
