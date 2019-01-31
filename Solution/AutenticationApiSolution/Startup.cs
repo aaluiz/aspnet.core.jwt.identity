@@ -16,6 +16,7 @@ using AuthenticationApiSolution.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace AuthenticationApiSolution
 {
@@ -63,6 +64,7 @@ namespace AuthenticationApiSolution
             {
                 authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddJwtBearer(bearerOptions =>
             {
                 var paramsValidation = bearerOptions.TokenValidationParameters;
@@ -80,7 +82,13 @@ namespace AuthenticationApiSolution
                 // caso haja problemas de sincronismo de horário entre diferentes
                 // computadores envolvidos no processo de comunicação)
                 paramsValidation.ClockSkew = TimeSpan.Zero;
-            });
+            }).AddCookie(options =>
+            {
+                options.LoginPath = "Identity/Account/Login";
+            })
+            
+            
+            ;
 
             // Ativa o uso do token como forma de autorizar o acesso
             // a recursos deste projeto

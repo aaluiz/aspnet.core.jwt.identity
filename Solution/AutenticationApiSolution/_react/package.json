@@ -1,0 +1,29 @@
+{
+    "name": "watchdogapi",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "build": "watchify -t [ babelify --presets [ @babel/preset-react] --sourceMapsAbsolute ] scr/js/main.jsx -o C:/Users//alan.luiz3896/source/repos/aaluiz/aspnet.core.jwt.identity/Solution/AutenticationApiSolution/wwwroot/js/main.js -v ",
+        "install": "copyfiles -f dist/js/main.js  F:/onedrive/_Projetos/portal/MAIN/SoluctionPortal/WebPortal/wwwroot/js"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.3.1",
+        "@babel/preset-react": "^7.0.0",
+        "axios": "^0.18.0",
+        "babelify": "^10.0.0",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "react-router-dom": "^4.3.1"
+    },
+    "dependencies": {
+        "browserify": "^16.2.3",
+        "init": "^0.1.2",
+        "npm": "^6.7.0",
+        "update": "^0.7.4"
+    }
+}
