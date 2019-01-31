@@ -88,8 +88,8 @@ namespace AuthenticationApiSolution
             {
                 options.LoginPath = "/auth/signin";
             })
-            
-            
+
+
             ;
 
             // Ativa o uso do token como forma de autorizar o acesso
@@ -101,7 +101,7 @@ namespace AuthenticationApiSolution
                     .RequireAuthenticatedUser().Build());
 
 
-           
+
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -139,9 +139,10 @@ namespace AuthenticationApiSolution
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
+
             });
         }
     }
