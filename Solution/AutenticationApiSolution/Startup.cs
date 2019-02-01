@@ -142,7 +142,6 @@ namespace AuthenticationApiSolution
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
-
             });
         }
     }

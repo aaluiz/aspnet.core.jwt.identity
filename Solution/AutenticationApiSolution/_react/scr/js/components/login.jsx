@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-
 class Login extends Component {
     constructor() {
         super();
@@ -8,36 +6,42 @@ class Login extends Component {
     }
     render() {
         return (
-            <div className="text-center">
-                <div className="card">
-                    <div class="card-body">
-                        <h1>Login</h1>
-                        <form>
-                            <div class="form-group">
-                                <input
-                                    className="form-control"
-                                    placeholder="Username goes here..."
-                                    name="username"
-                                    type="text"
-                                    onChange={this.handleChange}
-                                />
-                                <input
-                                    className="form-control"
-                                    placeholder="Password goes here..."
-                                    name="password"
-                                    type="password"
-                                    onChange={this.handleChange}
-                                />
-                                <input
-                                    className="form-submit"
-                                    value="SUBMIT"
-                                    type="submit"
-                                />
-                            </div>
-                        </form>
+            <section className="background-login">
+                <header className="masthead d-flex">
+                    <div className="container text-center my-auto">
+                        <div id="box" class="card card-container">
+                            <p id="profile-name" class="profile-name-card"></p>
+                            <h6 className="card-title text-info">Sitema de Gerenciaamento de APIs REST</h6>
+                            <form>
+                                <br />
+                                <div class="form-group">
+                                    <input
+                                        className="form-control"
+                                        placeholder="Username"
+                                        name="username"
+                                        type="text"
+                                        onChange={this.handleChange}
+                                    />
+                                    <br />
+                                    <input
+                                        className="form-control"
+                                        placeholder="Password "
+                                        name="password"
+                                        type="password"
+                                        onChange={this.handleChange}
+                                    />
+                                    <br />
+                                    <input
+                                        className="form-submit"
+                                        value="Logar"
+                                        type="submit"
+                                    />
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </header>
+            </section>
         );
     }
 

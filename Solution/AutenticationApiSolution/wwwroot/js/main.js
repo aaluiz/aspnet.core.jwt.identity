@@ -28149,31 +28149,39 @@ function (_Component) {
   _createClass(Login, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", {
-        className: "text-center"
+      return _react.default.createElement("section", {
+        className: "background-login"
+      }, _react.default.createElement("header", {
+        className: "masthead d-flex"
       }, _react.default.createElement("div", {
-        className: "card"
+        className: "container text-center my-auto"
       }, _react.default.createElement("div", {
-        class: "card-body"
-      }, _react.default.createElement("h1", null, "Login"), _react.default.createElement("form", null, _react.default.createElement("div", {
+        id: "box",
+        class: "card card-container"
+      }, _react.default.createElement("p", {
+        id: "profile-name",
+        class: "profile-name-card"
+      }), _react.default.createElement("h6", {
+        className: "card-title text-info"
+      }, "Sitema de Gerenciaamento de APIs REST"), _react.default.createElement("form", null, _react.default.createElement("br", null), _react.default.createElement("div", {
         class: "form-group"
       }, _react.default.createElement("input", {
         className: "form-control",
-        placeholder: "Username goes here...",
+        placeholder: "Username",
         name: "username",
         type: "text",
         onChange: this.handleChange
-      }), _react.default.createElement("input", {
+      }), _react.default.createElement("br", null), _react.default.createElement("input", {
         className: "form-control",
-        placeholder: "Password goes here...",
+        placeholder: "Password ",
         name: "password",
         type: "password",
         onChange: this.handleChange
-      }), _react.default.createElement("input", {
+      }), _react.default.createElement("br", null), _react.default.createElement("input", {
         className: "form-submit",
-        value: "SUBMIT",
+        value: "Logar",
         type: "submit"
-      }))))));
+      })))))));
     }
   }, {
     key: "handleChange",
@@ -28203,15 +28211,12 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var application = _react.default.createElement(_app.default, null);
 /**Carregar no DOM */
-
-
-_reactDom.default.render(_react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.Route, {
+_reactDom.default.render(_react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
   path: "/",
+  exact: true,
   component: _app.default
 }), _react.default.createElement(_reactRouterDom.Route, {
-  exact: true,
   path: "/login",
   component: _login.default
 }))), document.getElementById('root'));
