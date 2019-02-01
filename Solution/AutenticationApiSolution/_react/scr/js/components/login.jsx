@@ -1,9 +1,31 @@
 import React, { Component } from 'react';
+import '../services/authService.jsx'
+import AuthService from '../services/authService.jsx';
 class Login extends Component {
     constructor() {
         super();
         this.handleChange = this.handleChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.Auth = new AuthService();
     }
+
+    handleFormSubmit(e) {
+        e.preventDefault();
+
+        this.Auth.login(this.state.username, this.state.password)
+            .then(res => {
+                this.props.history.replace('/');
+            })
+            .catch(err => {
+                alert(err);
+            })
+    }
+
+    componentWillMount(){
+        if(this.Auth.loggedIn())
+            this.props.history.replace('/');
+    }
+
     render() {
         return (
             <section className="background-login ">
