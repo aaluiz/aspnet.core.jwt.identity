@@ -6,18 +6,18 @@ class Login extends Component {
     }
     render() {
         return (
-            <section className="background-login">
+            <section className="background-login ">
                 <header className="masthead d-flex">
                     <div className="container text-center my-auto">
                         <div id="box" class="card card-container">
                             <p id="profile-name" class="profile-name-card"></p>
-                            <h6 className="card-title text-info">Sitema de Gerenciaamento de APIs REST</h6>
+                            <h4 className="card-title text-info">Gerenciamento de APIs </h4>
                             <form>
                                 <br />
                                 <div class="form-group">
                                     <input
                                         className="form-control"
-                                        placeholder="Username"
+                                        placeholder="Usuário"
                                         name="username"
                                         type="text"
                                         onChange={this.handleChange}
@@ -25,14 +25,14 @@ class Login extends Component {
                                     <br />
                                     <input
                                         className="form-control"
-                                        placeholder="Password "
+                                        placeholder="Senha "
                                         name="password"
                                         type="password"
                                         onChange={this.handleChange}
                                     />
                                     <br />
                                     <input
-                                        className="form-submit"
+                                        className="btn btn-lg btn-primary btn-block btn-signin"
                                         value="Logar"
                                         type="submit"
                                     />

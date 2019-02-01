@@ -28150,7 +28150,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return _react.default.createElement("section", {
-        className: "background-login"
+        className: "background-login "
       }, _react.default.createElement("header", {
         className: "masthead d-flex"
       }, _react.default.createElement("div", {
@@ -28161,24 +28161,24 @@ function (_Component) {
       }, _react.default.createElement("p", {
         id: "profile-name",
         class: "profile-name-card"
-      }), _react.default.createElement("h6", {
+      }), _react.default.createElement("h4", {
         className: "card-title text-info"
-      }, "Sitema de Gerenciaamento de APIs REST"), _react.default.createElement("form", null, _react.default.createElement("br", null), _react.default.createElement("div", {
+      }, "Gerenciamento de APIs "), _react.default.createElement("form", null, _react.default.createElement("br", null), _react.default.createElement("div", {
         class: "form-group"
       }, _react.default.createElement("input", {
         className: "form-control",
-        placeholder: "Username",
+        placeholder: "Usu\xE1rio",
         name: "username",
         type: "text",
         onChange: this.handleChange
       }), _react.default.createElement("br", null), _react.default.createElement("input", {
         className: "form-control",
-        placeholder: "Password ",
+        placeholder: "Senha ",
         name: "password",
         type: "password",
         onChange: this.handleChange
       }), _react.default.createElement("br", null), _react.default.createElement("input", {
-        className: "form-submit",
+        className: "btn btn-lg btn-primary btn-block btn-signin",
         value: "Logar",
         type: "submit"
       })))))));
