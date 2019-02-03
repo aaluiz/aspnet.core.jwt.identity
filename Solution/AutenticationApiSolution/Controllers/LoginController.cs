@@ -61,9 +61,10 @@ namespace AuthenticationApiSolution.Controllers
                     }
                 );
 
+                tokenConfigurations.Audience = usuario.UserID;
                 DateTime dataCriacao = DateTime.Now;
                 DateTime dataExpiracao = dataCriacao +
-                    TimeSpan.FromSeconds(tokenConfigurations.Seconds + 120);
+                    TimeSpan.FromSeconds(tokenConfigurations.Seconds);
 
                 var handler = new JwtSecurityTokenHandler();
                 var securityToken = handler.CreateToken(new SecurityTokenDescriptor

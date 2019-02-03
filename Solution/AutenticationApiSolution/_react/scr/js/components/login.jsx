@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import '../services/authService.jsx'
-import AuthService from '../services/authService.jsx';
+import  AuthService  from "../services/AuthService.js"
+
 class Login extends Component {
     constructor() {
         super();
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        this.Auth = new AuthService();
+        this.state = {
+            auth: new AuthService('http://localhost:64042')
+        }
     }
 
     handleFormSubmit(e) {
         e.preventDefault();
 
-        this.Auth.login(this.state.username, this.state.password)
+        this.state.auth.login(this.state.username, this.state.password)
             .then(res => {
                 this.props.history.replace('/');
             })
@@ -21,8 +23,8 @@ class Login extends Component {
             })
     }
 
-    componentWillMount(){
-        if(this.Auth.loggedIn())
+    componentWillMount() {
+        if (this.state.auth.loggedIn())
             this.props.history.replace('/');
     }
 
@@ -56,7 +58,7 @@ class Login extends Component {
                                     <input
                                         className="btn btn-lg btn-primary btn-block btn-signin"
                                         value="Logar"
-                                        type="submit"
+                                        type="button" onClick={this.handleFormSubmit}
                                     />
                                 </div>
                             </form>

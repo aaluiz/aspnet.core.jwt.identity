@@ -28152,9 +28152,9 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _withAuth = _interopRequireDefault(require("../components/withAuth.jsx"));
+var _AuthService = _interopRequireDefault(require("../services/AuthService.js"));
 
-var _authService = _interopRequireDefault(require("../services/authService.jsx"));
+var _withAuth = require("../services/withAuth.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28176,8 +28176,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-var Auth = new _withAuth.default();
-
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -28190,7 +28188,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
-      cpf: ""
+      Auth: new _AuthService.default('http://localhost:64042/')
     };
     _this.handleLogout = _this.handleLogout.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -28199,7 +28197,7 @@ function (_React$Component) {
   _createClass(App, [{
     key: "handleLogout",
     value: function handleLogout() {
-      Auth.logout();
+      this.state.Auth.logout();
       this.props.history.replace('/login');
     }
   }, {
@@ -28209,11 +28207,7 @@ function (_React$Component) {
         className: "App"
       }, _react.default.createElement("div", {
         className: "App-header"
-      }, _react.default.createElement("img", {
-        src: logo,
-        className: "App-logo",
-        alt: "logo"
-      }), _react.default.createElement("h2", null, "Welcome ", this.props.user.username)), _react.default.createElement("p", {
+      }, _react.default.createElement("h2", null, "Welcome ", this.props.user.aud)), _react.default.createElement("p", {
         className: "App-intro"
       }, _react.default.createElement("button", {
         type: "button",
@@ -28226,11 +28220,11 @@ function (_React$Component) {
   return App;
 }(_react.default.Component);
 
-var _default = (0, _authService.default)(App);
+var _default = (0, _withAuth.withAuth)(App);
 
 exports.default = _default;
 
-},{"../components/withAuth.jsx":66,"../services/authService.jsx":68,"react":54}],65:[function(require,module,exports){
+},{"../services/AuthService.js":67,"../services/withAuth.js":68,"react":54}],65:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28240,7 +28234,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _authService = _interopRequireDefault(require("../services/authService.jsx"));
+var _AuthService = _interopRequireDefault(require("../services/AuthService.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28279,7 +28273,9 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleFormSubmit = _this.handleFormSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.Auth = new _authService.default();
+    _this.state = {
+      auth: new _AuthService.default('http://localhost:64042')
+    };
     return _this;
   }
 
@@ -28289,7 +28285,7 @@ function (_Component) {
       var _this2 = this;
 
       e.preventDefault();
-      this.Auth.login(this.state.username, this.state.password).then(function (res) {
+      this.state.auth.login(this.state.username, this.state.password).then(function (res) {
         _this2.props.history.replace('/');
       }).catch(function (err) {
         alert(err);
@@ -28298,7 +28294,7 @@ function (_Component) {
   }, {
     key: "componentWillMount",
     value: function componentWillMount() {
-      if (this.Auth.loggedIn()) this.props.history.replace('/');
+      if (this.state.auth.loggedIn()) this.props.history.replace('/');
     }
   }, {
     key: "render",
@@ -28334,7 +28330,8 @@ function (_Component) {
       }), _react.default.createElement("br", null), _react.default.createElement("input", {
         className: "btn btn-lg btn-primary btn-block btn-signin",
         value: "Logar",
-        type: "submit"
+        type: "button",
+        onClick: this.handleFormSubmit
       })))))));
     }
   }, {
@@ -28350,17 +28347,196 @@ function (_Component) {
 var _default = Login;
 exports.default = _default;
 
-},{"../services/authService.jsx":68,"react":54}],66:[function(require,module,exports){
+},{"../services/AuthService.js":67,"react":54}],66:[function(require,module,exports){
+"use strict";
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _app = _interopRequireDefault(require("./components/app.jsx"));
+
+var _login = _interopRequireDefault(require("./components/login.jsx"));
+
+var _reactRouterDom = require("react-router-dom");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**Carregar no DOM */
+_reactDom.default.render(_react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+  path: "/",
+  exact: true,
+  component: _app.default
+}), _react.default.createElement(_reactRouterDom.Route, {
+  path: "/login",
+  component: _login.default
+}))), document.getElementById('root'));
+
+},{"./components/app.jsx":64,"./components/login.jsx":65,"react":54,"react-dom":26,"react-router-dom":39}],67:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = withAuth;
+exports.default = void 0;
+
+var _jwtDecode = _interopRequireDefault(require("jwt-decode"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var AuthService =
+/*#__PURE__*/
+function () {
+  // Initializing important variables
+  function AuthService(domain) {
+    _classCallCheck(this, AuthService);
+
+    this.domain = domain || 'http://localhost:8080'; // API server domain
+
+    this.fetch = this.fetch.bind(this); // React binding stuff
+
+    this.login = this.login.bind(this);
+    this.getProfile = this.getProfile.bind(this);
+  }
+
+  _createClass(AuthService, [{
+    key: "login",
+    value: function login(userID, password) {
+      var _this = this;
+
+      // Get a token from api server using the fetch api
+      return this.fetch("".concat(this.domain, "/api/login"), {
+        method: 'POST',
+        body: JSON.stringify({
+          userID: userID,
+          password: password
+        })
+      }).then(function (res) {
+        _this.setToken(res.accessToken); // Setting the token in localStorage
+
+
+        return Promise.resolve(res);
+      });
+    }
+  }, {
+    key: "loggedIn",
+    value: function loggedIn() {
+      // Checks if there is a saved token and it's still valid
+      var token = this.getToken(); // GEtting token from localstorage
+
+      return !!token && !this.isTokenExpired(token); // handwaiving here
+    }
+  }, {
+    key: "isTokenExpired",
+    value: function isTokenExpired(token) {
+      try {
+        var decoded = (0, _jwtDecode.default)(token);
+
+        if (decoded.exp < Date.now() / 1000) {
+          // Checking if token is expired. N
+          return true;
+        } else return false;
+      } catch (err) {
+        return false;
+      }
+    }
+  }, {
+    key: "setToken",
+    value: function setToken(idToken) {
+      // Saves user token to localStorage
+      localStorage.setItem('id_token', idToken);
+    }
+  }, {
+    key: "getToken",
+    value: function getToken() {
+      // Retrieves the user token from localStorage
+      return localStorage.getItem('id_token');
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      // Clear user token and profile data from localStorage
+      localStorage.removeItem('id_token');
+    }
+  }, {
+    key: "getProfile",
+    value: function getProfile() {
+      // Using jwt-decode npm package to decode the token
+      return (0, _jwtDecode.default)(this.getToken());
+    }
+  }, {
+    key: "fetch",
+    value: function (_fetch) {
+      function fetch(_x, _x2) {
+        return _fetch.apply(this, arguments);
+      }
+
+      fetch.toString = function () {
+        return _fetch.toString();
+      };
+
+      return fetch;
+    }(function (url, options) {
+      // performs api calls sending the required authentication headers
+      var headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' // Setting Authorization header
+        // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
+
+      };
+
+      if (this.loggedIn()) {
+        headers['Authorization'] = 'Bearer ' + this.getToken();
+      }
+
+      return fetch(url, _objectSpread({
+        headers: headers
+      }, options)).then(this._checkStatus).then(function (response) {
+        return response.json();
+      });
+    })
+  }, {
+    key: "_checkStatus",
+    value: function _checkStatus(response) {
+      // raises an error in case response status is not a success
+      if (response.status >= 200 && response.status < 300) {
+        // Success status lies between 200 to 300
+        return response;
+      } else {
+        var error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+      }
+    }
+  }]);
+
+  return AuthService;
+}();
+
+var _default = AuthService;
+exports.default = _default;
+
+},{"jwt-decode":15}],68:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.withAuth = withAuth;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _authService = _interopRequireDefault(require("../services/authService.jsx"));
+var _AuthService = _interopRequireDefault(require("./AuthService.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28385,7 +28561,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function withAuth(AuthComponent) {
-  var Auth = new _authService.default('api/login');
+  var Auth = new _AuthService.default('http://localhost:64042');
   return (
     /*#__PURE__*/
     function (_Component) {
@@ -28439,200 +28615,4 @@ function withAuth(AuthComponent) {
   );
 }
 
-},{"../services/authService.jsx":68,"react":54}],67:[function(require,module,exports){
-"use strict";
-
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
-var _react = _interopRequireDefault(require("react"));
-
-var _app = _interopRequireDefault(require("./components/app.jsx"));
-
-var _login = _interopRequireDefault(require("./components/login.jsx"));
-
-var _reactRouterDom = require("react-router-dom");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**Carregar no DOM */
-_reactDom.default.render(_react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
-  path: "/",
-  exact: true,
-  component: _app.default
-}), _react.default.createElement(_reactRouterDom.Route, {
-  path: "/login",
-  component: _login.default
-}))), document.getElementById('root'));
-
-},{"./components/app.jsx":64,"./components/login.jsx":65,"react":54,"react-dom":26,"react-router-dom":39}],68:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _jwtDecode = require("jwt-decode");
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-var AuthService =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(AuthService, _Component);
-
-  // Initializing important variables
-  function AuthService(props) {
-    var _this;
-
-    _classCallCheck(this, AuthService);
-
-    _this.props.domain = domain || 'https://localhost:44351/'; // API server domain
-
-    _this.props.fetch = _this.fetch.bind(_assertThisInitialized(_assertThisInitialized(_this))); // React binding stuff
-
-    _this.props.login = _this.login.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.props.getProfile = _this.getProfile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    return _possibleConstructorReturn(_this);
-  }
-
-  _createClass(AuthService, [{
-    key: "login",
-    value: function login(username, password) {
-      var _this2 = this;
-
-      // Get a token from api server using the fetch api
-      return this.fetch("".concat(this.domain, "/login"), {
-        method: 'POST',
-        body: JSON.stringify({
-          username: username,
-          password: password
-        })
-      }).then(function (res) {
-        _this2.setToken(res.token); // Setting the token in localStorage
-
-
-        return Promise.resolve(res);
-      });
-    }
-  }, {
-    key: "loggedIn",
-    value: function loggedIn() {
-      // Checks if there is a saved token and it's still valid
-      var token = this.getToken(); // GEtting token from localstorage
-
-      return !!token && !this.isTokenExpired(token); // handwaiving here
-    }
-  }, {
-    key: "isTokenExpired",
-    value: function isTokenExpired(token) {
-      try {
-        var decoded = (0, _jwtDecode.decode)(token);
-
-        if (decoded.exp < Date.now() / 1000) {
-          // Checking if token is expired. N
-          return true;
-        } else return false;
-      } catch (err) {
-        return false;
-      }
-    }
-  }, {
-    key: "setToken",
-    value: function setToken(idToken) {
-      // Saves user token to localStorage
-      localStorage.setItem('id_token', idToken);
-    }
-  }, {
-    key: "getToken",
-    value: function getToken() {
-      // Retrieves the user token from localStorage
-      return localStorage.getItem('id_token');
-    }
-  }, {
-    key: "logout",
-    value: function logout() {
-      // Clear user token and profile data from localStorage
-      localStorage.removeItem('id_token');
-    }
-  }, {
-    key: "getProfile",
-    value: function getProfile() {
-      // Using jwt-decode npm package to decode the token
-      return (0, _jwtDecode.decode)(this.getToken());
-    }
-  }, {
-    key: "fetch",
-    value: function (_fetch) {
-      function fetch(_x, _x2) {
-        return _fetch.apply(this, arguments);
-      }
-
-      fetch.toString = function () {
-        return _fetch.toString();
-      };
-
-      return fetch;
-    }(function (url, options) {
-      // performs api calls sending the required authentication headers
-      var headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json' // Setting Authorization header
-        // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-
-      };
-
-      if (this.loggedIn()) {
-        headers['Authorization'] = 'Bearer ' + this.getToken();
-      }
-
-      return fetch(url, _objectSpread({
-        headers: headers
-      }, options)).then(this._checkStatus).then(function (response) {
-        return response.json();
-      });
-    })
-  }, {
-    key: "_checkStatus",
-    value: function _checkStatus(response) {
-      // raises an error in case response status is not a success
-      if (response.status >= 200 && response.status < 300) {
-        // Success status lies between 200 to 300
-        return response;
-      } else {
-        var error = new Error(response.statusText);
-        error.response = response;
-        throw error;
-      }
-    }
-  }]);
-
-  return AuthService;
-}(_react.Component);
-
-var _default = AuthService;
-exports.default = _default;
-
-},{"jwt-decode":15,"react":54}]},{},[67]);
+},{"./AuthService.js":67,"react":54}]},{},[66]);

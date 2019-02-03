@@ -5,8 +5,6 @@ import Login from './components/login.jsx';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-
-
 /**Carregar no DOM */
 ReactDOM.render(
     <BrowserRouter>

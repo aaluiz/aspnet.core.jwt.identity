@@ -4,7 +4,7 @@
     "description": "",
     "main": "main.js",
     "scripts": {
-        "build": "watchify -t [ babelify --presets [ @babel/preset-react] --sourceMapsAbsolute ] scr/js/main.jsx -o C:/Users//alan.luiz3896/source/repos/aaluiz/aspnet.core.jwt.identity/Solution/AutenticationApiSolution/wwwroot/js/main.js -v ",
+        "build": "watchify -t [ babelify --presets [ @babel/preset-react] --sourceMapsAbsolute ] scr/js/main.jsx -o E:/DEV/aspnet.core.jwt.identity/Solution/AutenticationApiSolution/wwwroot/js/main.js -v ",
         "install": "copyfiles -f dist/js/main.js  F:/onedrive/_Projetos/portal/MAIN/SoluctionPortal/WebPortal/wwwroot/js"
     },
     "author": "",

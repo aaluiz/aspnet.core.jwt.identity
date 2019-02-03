@@ -1,25 +1,24 @@
-import React, { Component } from 'react';
-import {decode} from 'jwt-decode';
+import decode from 'jwt-decode';
 
-class AuthService extends Component {
+class AuthService {
     // Initializing important variables
-    constructor(props) {
-        this.props.domain = domain || 'https://localhost:44351/' // API server domain
-        this.props.fetch = this.fetch.bind(this) // React binding stuff
-        this.props.login = this.login.bind(this)
-        this.props.getProfile = this.getProfile.bind(this)
+    constructor(domain) {
+        this.domain = domain || 'http://localhost:8080' // API server domain
+        this.fetch = this.fetch.bind(this) // React binding stuff
+        this.login = this.login.bind(this)
+        this.getProfile = this.getProfile.bind(this)
     }
 
-    login(username, password) {
+    login(userID, password) {
         // Get a token from api server using the fetch api
-        return this.fetch(`${this.domain}/login`, {
+        return this.fetch(`${this.domain}/api/login`, {
             method: 'POST',
             body: JSON.stringify({
-                username,
+                userID,
                 password
             })
         }).then(res => {
-            this.setToken(res.token) // Setting the token in localStorage
+            this.setToken(res.accessToken) // Setting the token in localStorage
             return Promise.resolve(res);
         })
     }
@@ -97,5 +96,6 @@ class AuthService extends Component {
         }
     }
 }
+
 
 export default AuthService;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import AuthService from '../services/authService.jsx';
+import AuthService from './AuthService.js';
 
-export default function withAuth(AuthComponent) {
-    const Auth = new AuthService('api/login');
 
+export  function withAuth(AuthComponent) {
+    const Auth = new AuthService('http://localhost:64042');
     return class AuthWrapped extends Component {
         constructor() {
             super();
@@ -41,5 +41,4 @@ export default function withAuth(AuthComponent) {
             }
         }
     }
-
 }
