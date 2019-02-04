@@ -1,32 +1,28 @@
 ﻿import React from 'react';
 import AuthService from '../services/AuthService.js';
-import {withAuth} from '../services/withAuth.js';
+import { withAuth } from '../services/withAuth.js';
+import Wrapper from '../components/wrapper.jsx';
+
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            Auth: new AuthService('http://localhost:64042/'),
+            Auth: new AuthService(),
         };
         this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleLogout(){
+    handleLogout() {
         this.state.Auth.logout();
         this.props.history.replace('/login');
-     }
+    }
 
     render() {
         return (
-            <div className="App">
-            <div className="App-header">
-             
-            <h2>Welcome {this.props.user.aud}</h2>
-            </div>
-            <p className="App-intro">
-                <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
-            </p>
-            </div>
+            <Wrapper>
+
+            </Wrapper>
         );
     }
 }

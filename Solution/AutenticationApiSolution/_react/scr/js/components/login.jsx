@@ -7,7 +7,7 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.state = {
-            auth: new AuthService('http://localhost:64042')
+            auth: new AuthService()
         }
     }
 
