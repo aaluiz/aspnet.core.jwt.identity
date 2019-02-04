@@ -28387,8 +28387,16 @@ function (_React$Component) {
   _createClass(TopBarSearch, [{
     key: "render",
     value: function render() {
+      var visible;
+
+      if (this.props.visible == true) {
+        visible = "visible";
+      } else {
+        visible = "invisible";
+      }
+
       return _react.default.createElement("form", {
-        className: "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+        className: "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search " + visible
       }, _react.default.createElement("div", {
         className: "input-group"
       }, _react.default.createElement("input", {
@@ -29058,7 +29066,9 @@ function (_React$Component) {
   _createClass(Register, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement(_wrapper.default, null, _react.default.createElement(_topBarSearch.default, null));
+      return _react.default.createElement(_wrapper.default, {
+        withSearch: true
+      });
     }
   }]);
 
@@ -29083,6 +29093,8 @@ var _sideBarComponent = _interopRequireDefault(require("./interface/sideBar/side
 var _content = _interopRequireDefault(require("../components/form/content.jsx"));
 
 var _topBar = _interopRequireDefault(require("../components/form/topBar.jsx"));
+
+var _topBarSearch = _interopRequireDefault(require("../components/form/topBarSearch.jsx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29124,7 +29136,9 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         id: "wrapper"
-      }, _react.default.createElement(_sideBarComponent.default, null), _react.default.createElement(_content.default, null, _react.default.createElement(_topBar.default, null, this.props.children)));
+      }, _react.default.createElement(_sideBarComponent.default, null), _react.default.createElement(_content.default, null, _react.default.createElement(_topBar.default, null, _react.default.createElement(_topBarSearch.default, {
+        visible: this.props.withSearch
+      })), this.props.children));
     }
   }]);
 
@@ -29134,7 +29148,7 @@ function (_React$Component) {
 var _default = Wrapper;
 exports.default = _default;
 
-},{"../components/form/content.jsx":65,"../components/form/topBar.jsx":66,"./interface/sideBar/sideBarComponent.jsx":74,"react":54}],78:[function(require,module,exports){
+},{"../components/form/content.jsx":65,"../components/form/topBar.jsx":66,"../components/form/topBarSearch.jsx":67,"./interface/sideBar/sideBarComponent.jsx":74,"react":54}],78:[function(require,module,exports){
 "use strict";
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
