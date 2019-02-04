@@ -11,14 +11,12 @@ class Wrapper extends React.Component {
     render() {
         return (
             <div id="wrapper">
-                <Wrapper>
-                    <SideBar />
-                    <Content>
-                        <Topbar>
-                            {this.props.children}
-                        </Topbar>
-                    </Content>
-                </Wrapper>
+                <SideBar />
+                <Content>
+                    <Topbar>
+                        {this.props.children}
+                    </Topbar>
+                </Content>
             </div>
         );
     }

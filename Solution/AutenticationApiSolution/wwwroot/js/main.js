@@ -29016,12 +29016,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _content = _interopRequireDefault(require("../components/form/content.jsx"));
-
-var _topBar = _interopRequireDefault(require("../components/form/topBar.jsx"));
-
-var _sideBarComponent = _interopRequireDefault(require("../components/interface/sideBar/sideBarComponent.jsx"));
-
 var _topBarSearch = _interopRequireDefault(require("../components/form/topBarSearch.jsx"));
 
 var _wrapper = _interopRequireDefault(require("../components/wrapper.jsx"));
@@ -29074,7 +29068,7 @@ function (_React$Component) {
 var _default = Register;
 exports.default = _default;
 
-},{"../components/form/content.jsx":65,"../components/form/topBar.jsx":66,"../components/form/topBarSearch.jsx":67,"../components/interface/sideBar/sideBarComponent.jsx":74,"../components/wrapper.jsx":77,"react":54}],77:[function(require,module,exports){
+},{"../components/form/topBarSearch.jsx":67,"../components/wrapper.jsx":77,"react":54}],77:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29130,7 +29124,7 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         id: "wrapper"
-      }, _react.default.createElement(Wrapper, null, _react.default.createElement(_sideBarComponent.default, null), _react.default.createElement(_content.default, null, _react.default.createElement(_topBar.default, null, this.props.children))));
+      }, _react.default.createElement(_sideBarComponent.default, null), _react.default.createElement(_content.default, null, _react.default.createElement(_topBar.default, null, this.props.children)));
     }
   }]);
 
