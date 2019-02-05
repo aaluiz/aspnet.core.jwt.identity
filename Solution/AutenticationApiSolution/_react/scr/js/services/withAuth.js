@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService.js';
 
+//**Teste */
 
 export  function withAuth(AuthComponent) {
     const Auth = new AuthService();

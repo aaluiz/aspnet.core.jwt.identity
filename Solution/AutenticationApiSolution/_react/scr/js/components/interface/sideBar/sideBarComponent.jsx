@@ -7,6 +7,8 @@ import Divider from './divider.jsx';
 import Heading from './heading.jsx'
 import CollapseMenu from './collapseMenu/collapseMenu.jsx';
 import CollapseMenuItem from './collapseMenu/itemCollapseMenu.jsx';
+import NavItem from './navItem.jsx';
+
 
 class SideBarComponent extends React.Component {
     constructor(props) {
@@ -22,7 +24,12 @@ class SideBarComponent extends React.Component {
                     <CollapseMenu icon={"fas fa-user fa-sm fa-fw"} name={"Gerenciamento"} subtitle={"Ações"}>
                         <CollapseMenuItem name={"Cadastrar"} link={"/register"} />
                     </CollapseMenu>
+                    <Divider />
+                    <Heading HeadingName={"Listas"} />
+                    <NavItem name="Configurações" icon={"fas fa-coffee"} link={"/register"}/>
+                    <NavItem name="Novo" icon={"fas fa-coffee"} link={"/"}/>
                 </SideBar>
+               
         );
     }
 }

@@ -20,7 +20,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <Wrapper>
+            <Wrapper username={this.props.user.aud}>
 
             </Wrapper>
         );
