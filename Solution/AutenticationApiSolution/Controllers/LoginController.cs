@@ -61,7 +61,7 @@ namespace AuthenticationApiSolution.Controllers
                     }
                 );
 
-                tokenConfigurations.Audience = usuario.UserID;
+               // tokenConfigurations.Audience = usuario.UserID;
                 DateTime dataCriacao = DateTime.Now;
                 DateTime dataExpiracao = dataCriacao +
                     TimeSpan.FromSeconds(tokenConfigurations.Seconds);

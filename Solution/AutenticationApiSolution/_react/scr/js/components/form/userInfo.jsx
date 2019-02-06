@@ -4,7 +4,13 @@ class UserInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.logout = this.logout.bind(this);
     }
+
+    logout(){
+         this.props.logout();  
+    }
+
     render() {
         return (
             <div>
@@ -23,10 +29,10 @@ class UserInfo extends Component {
                             Settings
                         </a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <div className="dropdown-item" onClick={this.logout}>
                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
-                        </a>
+                        </div>
                     </div>
                 </li>
             </div>

@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-class TopNavBar extends Component {
+
+class pageContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {  };
     }
     render() {
         return (
-            <ul className="navbar-nav ml-auto">
+            <div className="container-fluid">
                 {this.props.children}
-            </ul>
+            </div>
         );
     }
 }
 
-export default TopNavBar;
+export default pageContainer;
