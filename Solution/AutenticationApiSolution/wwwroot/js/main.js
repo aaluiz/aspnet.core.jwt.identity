@@ -43571,15 +43571,13 @@ function (_Component) {
     value: function render() {
       var products = [{
         id: 1,
-        name: "Product1",
-        price: 120
+        name: "Product1"
       }, {
         id: 2,
-        name: "Product2",
-        price: 80
+        name: "Product2"
       }];
       return _react.default.createElement(_pageContainer.default, null, _react.default.createElement(_pageHeading.default, {
-        title: "Cadastra Novo Usu\xE1rio"
+        title: "Deletar Conta"
       }), _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("div", {
@@ -43590,6 +43588,7 @@ function (_Component) {
         data: products,
         striped: true,
         hover: true,
+        deleteRow: true,
         selectRow: {
           mode: 'radio'
         },
@@ -43599,17 +43598,11 @@ function (_Component) {
       }, _react.default.createElement(TableHeaderColumn, {
         isKey: true,
         dataField: "id",
-        width: "20"
+        width: "40"
       }, "Product ID"), _react.default.createElement(TableHeaderColumn, {
         dataField: "name",
         width: "120"
-      }, "Product Name"), _react.default.createElement(TableHeaderColumn, {
-        dataField: "price",
-        width: "40"
-      }, "Product Price"), _react.default.createElement(TableHeaderColumn, {
-        dataField: "action",
-        width: "40"
-      }, "Delete"))))));
+      }, "Product Name"))))));
     }
   }]);
 
@@ -43629,6 +43622,12 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _pageContainer = _interopRequireDefault(require("../pageContent/pageContainer.jsx"));
+
+var _pageHeading = _interopRequireDefault(require("../pageContent/pageHeading.jsx"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -43641,13 +43640,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+var ReactBsTable = require('react-bootstrap-table');
+
+var BootstrapTable = ReactBsTable.BootstrapTable;
+var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 
 var funcoes =
 /*#__PURE__*/
@@ -43661,13 +43665,54 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(funcoes).call(this, props));
     _this.state = {};
+    _this.handleDel = _this.handleDel.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(funcoes, [{
+    key: "handleDel",
+    value: function handleDel() {
+      alert('deleted');
+    }
+  }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("p", null, "Em constru\xE7\xE3o...");
+      var products = [{
+        id: 1,
+        name: "Product1",
+        price: 120
+      }, {
+        id: 2,
+        name: "Product2",
+        price: 80
+      }];
+      return _react.default.createElement(_pageContainer.default, null, _react.default.createElement(_pageHeading.default, {
+        title: "Deletar Fun\xE7\xE3o"
+      }), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "col-lg-12"
+      }, _react.default.createElement("div", {
+        className: "p-lg-5"
+      }, _react.default.createElement(BootstrapTable, {
+        data: products,
+        striped: true,
+        hover: true,
+        deleteRow: true,
+        selectRow: {
+          mode: 'radio'
+        },
+        options: {
+          onDeleteRow: this.handleDel
+        }
+      }, _react.default.createElement(TableHeaderColumn, {
+        isKey: true,
+        dataField: "id",
+        width: "40"
+      }, "Product ID"), _react.default.createElement(TableHeaderColumn, {
+        dataField: "name",
+        width: "120"
+      }, "Product Name"))))));
     }
   }]);
 
@@ -43677,7 +43722,7 @@ function (_Component) {
 var _default = funcoes;
 exports.default = _default;
 
-},{"react":116}],143:[function(require,module,exports){
+},{"../pageContent/pageContainer.jsx":139,"../pageContent/pageHeading.jsx":140,"react":116,"react-bootstrap-table":50}],143:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

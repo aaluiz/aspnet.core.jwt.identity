@@ -20,28 +20,22 @@ class contas extends Component {
         var products = [{
             id: 1,
             name: "Product1",
-            price: 120,
-
         }, {
             id: 2,
             name: "Product2",
-            price: 80,
-
         }];
 
         return (
 
             <ContentPage>
-                <PageHeading title="Cadastra Novo Usuário" />
+                <PageHeading title="Deletar Conta" />
                
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="p-lg-5">
-                                <BootstrapTable data={products} striped hover  selectRow={{mode:'radio'}} options={{onDeleteRow:this.handleDel}}>
-                                    <TableHeaderColumn isKey dataField='id' width='20'>Product ID</TableHeaderColumn>
+                                <BootstrapTable data={products} striped hover deleteRow={true}  selectRow={{mode:'radio'}} options={{onDeleteRow:this.handleDel}}>
+                                    <TableHeaderColumn isKey dataField='id' width='40'>Product ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='name' width='120'>Product Name</TableHeaderColumn>
-                                    <TableHeaderColumn dataField='price' width='40'>Product Price</TableHeaderColumn>
-                                    <TableHeaderColumn dataField='action' width='40'>Delete</TableHeaderColumn>
                                 </BootstrapTable>
                             </div>
                         </div>
