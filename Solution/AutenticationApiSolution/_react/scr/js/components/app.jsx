@@ -13,9 +13,10 @@ import Divider from './interface/sideBar/divider.jsx';
 import CollapseMenu from './interface/sideBar/collapseMenu/collapseMenu.jsx';
 import CollapseMenuItem from './interface/sideBar/collapseMenu/itemCollapseMenu.jsx';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import ContentPage from './pageContent/pageContainer.jsx'
-import PageHeading from './pageContent/pageHeading.jsx';
-import Register from './register.jsx';
+import Register from './pages/registerAccount.jsx';
+import Role from './pages/registerRole.jsx';
+import Contas from './pages/contas.jsx';
+import Funcoes from './pages/funcoes.jsx';
 
 
 class App extends React.Component {
@@ -36,20 +37,24 @@ class App extends React.Component {
 
         const routes = [
             {
-                path: "/teste",
+                path: "/castrarRole",
                 exact: true,
-                component: () => {
-                    return (
-                        <ContentPage>
-                            <PageHeading title="Testando... 1, 2, 3..." />
-                        </ContentPage>
-                    );
-                }
+                component: () => {return (<Role/>)}
             },
             {
-                path:"/cadastrar",
+                path:'/cadastrarAccount',
                 exact: false,
                 component:()=>{return(<Register/>)}
+            },
+            {
+                path: "/contas",
+                exact: true,
+                component: () => {return (<Contas/>)}
+            },
+            {
+                path:'/funcoes',
+                exact: false,
+                component:()=>{return(<Funcoes/>)}
             }
         ];
 
@@ -62,9 +67,13 @@ class App extends React.Component {
                         </Link>
                         <Divider />
                         <Heading HeadingName={"Usuários"} />
-                        <CollapseMenu icon={"fas fa-user fa-sm fa-fw"} name={"Gerenciamento"} subtitle={"Ações"}>
-                            <CollapseMenuItem name={"Cadastrar"} link={"/cadastrar"} />
-                            <CollapseMenuItem name={"Testar"} link={"/teste"} />
+                        <CollapseMenu icon={"fas fa-user fa-sm fa-fw"} name={"Cadastrar"} subtitle={"Ações"}>
+                            <CollapseMenuItem name={"Nova Conta"} link={"/cadastrarAccount"} />
+                            <CollapseMenuItem name={"Nova Função"} link={"/castrarRole"} />
+                        </CollapseMenu>
+                        <CollapseMenu icon={"fas fa-clipboard-list fa-sm fa-fw"} name={"Gerenciar"} subtitle={"Ações"}>
+                            <CollapseMenuItem name={"Contas"} link={"/contas"} />
+                            <CollapseMenuItem name={"Funções"} link={"/funcoes"} />
                         </CollapseMenu>
                     </SideBar>
                     <Content>

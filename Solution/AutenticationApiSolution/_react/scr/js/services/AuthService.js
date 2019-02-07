@@ -11,7 +11,7 @@ class AuthService {
 
     login(userID, password) {
         // Get a token from api server using the fetch api
-        return this.fetch(`${this.domain}/api/login`, {
+        return this.fetch(`${this.domain}/api/loginapp`, {
             method: 'POST',
             body: JSON.stringify({
                 userID,

@@ -17,7 +17,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
+using AuthenticationApiSolution.Policies;
 
 namespace AuthenticationApiSolution
 {
@@ -44,8 +44,6 @@ namespace AuthenticationApiSolution
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-
-
             // Ativando a utilização do ASP.NET Identity, a fim de
             // permitir a recuperação de seus objetos via injeção de
             // dependências
@@ -62,6 +60,12 @@ namespace AuthenticationApiSolution
                     .Configure(tokenConfigurations);
             services.AddSingleton(tokenConfigurations);
 
+            var tokenConfigurationsApp = new TokenConfigurationsApp();
+            new ConfigureFromConfigurationOptions<TokenConfigurationsApp>(
+                Configuration.GetSection("TokenConfigurationsApp"))
+                    .Configure(tokenConfigurationsApp);
+            services.AddSingleton(tokenConfigurationsApp);
+
             services.AddAuthentication(authOptions =>
             {
                 authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,9 +74,18 @@ namespace AuthenticationApiSolution
             }).AddJwtBearer(bearerOptions =>
             {
                 var paramsValidation = bearerOptions.TokenValidationParameters;
+
                 paramsValidation.IssuerSigningKey = signingConfigurations.Key;
-                paramsValidation.ValidAudience = tokenConfigurations.Audience;
-                paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
+                paramsValidation.ValidAudiences = new List<string>
+                {
+                    "partnership",
+                    "house"
+                };
+                paramsValidation.ValidIssuers = new List<string>
+                {
+                    "API",
+                    "App"
+                };
 
                 // Valida a assinatura de um token recebido
                 paramsValidation.ValidateIssuerSigningKey = true;
@@ -84,30 +97,35 @@ namespace AuthenticationApiSolution
                 // caso haja problemas de sincronismo de horário entre diferentes
                 // computadores envolvidos no processo de comunicação)
                 paramsValidation.ClockSkew = TimeSpan.Zero;
-            }).AddCookie(options =>
-            {
-                options.LoginPath = "/auth/signin";
-            })
-
-
-            ;
+            });
 
             // Ativa o uso do token como forma de autorizar o acesso
             // a recursos deste projeto
             services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                {
+                    Requirements = new List<IAuthorizationRequirement>
+                    {
+                        new IssuerRequeriment("API")
+                    }
+                }
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
 
-                auth.AddPolicy("xxx", new AuthorizationPolicyBuilder()
+                auth.AddPolicy("App", new AuthorizationPolicyBuilder()
+                {
+                    Requirements = new List<IAuthorizationRequirement>
+                    {
+                        new IssuerRequeriment("App")
+                    }
+                }
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser().Build());
-
-
-
-
+                    .RequireAuthenticatedUser()
+                    .Build());
             });
+
+            services.AddSingleton<IAuthorizationHandler, IssuerHandler>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
