@@ -6,13 +6,17 @@ import ApiCaller from '../../services/ServiceApiIntegrator.js'
 class registerRole extends Component {
     constructor(props) {
         super(props);
-        this.state = { roleName: "" };
+        this.state = { 
+            roleName: "",
+            apiCaller: new ApiCaller() ,
+            data: ""
+        };
         this.handleChange = this.handleChange.bind(this);
         this.clickRegister = this.clickRegister.bind(this);
     }
 
     clickRegister(e){
-        alert(this.state);
+       this.setState({data: this.state.apiCaller.post("api/identity/create/role/"+this.state.roleName)});
     }
 
     render() {
@@ -31,7 +35,7 @@ class registerRole extends Component {
                                             </div>
                                         </div>
                                         <div className="btn btn-primary btn-user btn-block" onClick={this.clickRegister}>
-                                            Registrar Nova Conta
+                                            Registrar Nova Função (Role)
                                         </div>
                                         <hr />
                                     </form>

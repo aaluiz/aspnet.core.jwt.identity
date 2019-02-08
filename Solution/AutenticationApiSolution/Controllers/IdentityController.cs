@@ -70,7 +70,7 @@ namespace AuthenticationApiSolution.Controllers
                     UserName = user.UserID,
                     Email = user.Email,
                     EmailConfirmed = true
-                }, user.Password, Roles.ROLE_API);
+                },  user.Password, Roles.ROLE_API);
         }
 
         [HttpPost("create/role/{roleName}")]

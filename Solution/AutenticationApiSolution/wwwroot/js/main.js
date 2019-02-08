@@ -43957,7 +43957,7 @@ var _default = (0, _withAuth.withAuth)(App);
 
 exports.default = _default;
 
-},{"../services/AuthService.js":172,"../services/withAuth.js":174,"./form/content.jsx":153,"./form/topBar.jsx":154,"./form/topBarSearch.jsx":155,"./form/topNavBar.jsx":156,"./form/userInfo.jsx":157,"./interface/sideBar/brande.jsx":158,"./interface/sideBar/collapseMenu/collapseMenu.jsx":159,"./interface/sideBar/collapseMenu/itemCollapseMenu.jsx":160,"./interface/sideBar/divider.jsx":161,"./interface/sideBar/heading.jsx":162,"./interface/sideBar/sideBar.jsx":163,"./pages/contas.jsx":167,"./pages/funcoes.jsx":168,"./pages/registerAccount.jsx":169,"./pages/registerRole.jsx":170,"react":142,"react-router-dom":120}],153:[function(require,module,exports){
+},{"../services/AuthService.js":173,"../services/withAuth.js":175,"./form/content.jsx":153,"./form/topBar.jsx":154,"./form/topBarSearch.jsx":155,"./form/topNavBar.jsx":156,"./form/userInfo.jsx":157,"./interface/sideBar/brande.jsx":159,"./interface/sideBar/collapseMenu/collapseMenu.jsx":160,"./interface/sideBar/collapseMenu/itemCollapseMenu.jsx":161,"./interface/sideBar/divider.jsx":162,"./interface/sideBar/heading.jsx":163,"./interface/sideBar/sideBar.jsx":164,"./pages/contas.jsx":168,"./pages/funcoes.jsx":169,"./pages/registerAccount.jsx":170,"./pages/registerRole.jsx":171,"react":142,"react-router-dom":120}],153:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44329,6 +44329,101 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _react = _interopRequireWildcard(require("react"));
+
+var _ServiceApiIntegrator = _interopRequireDefault(require("../../services/ServiceApiIntegrator.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+var selectRole =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(selectRole, _Component);
+
+  function selectRole(props) {
+    var _this;
+
+    _classCallCheck(this, selectRole);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(selectRole).call(this, props));
+    _this.state = {
+      caller: new ApiCalle(),
+      dados: []
+    };
+    _this.getDataFromServer = _this.getDataFromServer.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(selectRole, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.setState({
+        dados: this.state.api.get('api/identity/funcoes')
+      });
+    }
+  }, {
+    key: "getDataFromServer",
+    value: function getDataFromServer() {
+      var caller = this.state.caller;
+      var api = this.state.caller.getApi();
+      api.get('api/identity/funcoes');
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var data = this.state.dados;
+      var list = [];
+      data.forEach(function (item) {
+        list.push(item.name);
+      });
+      selectCore = list.map(function (func, index) {
+        return _react.default.createElement("option", {
+          key: index,
+          value: func.name
+        }, func.name);
+      });
+      return _react.default.createElement("select", {
+        className: "form-control form-control-user",
+        id: "roles",
+        name: "roles"
+      }, selectCore);
+    }
+  }]);
+
+  return selectRole;
+}(_react.Component);
+
+var _default = selectRole;
+exports.default = _default;
+
+},{"../../services/ServiceApiIntegrator.js":174,"react":142}],159:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -44387,7 +44482,7 @@ function (_React$Component) {
 var _default = Brande;
 exports.default = _default;
 
-},{"react":142}],159:[function(require,module,exports){
+},{"react":142}],160:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44465,7 +44560,7 @@ function (_React$Component) {
 var _default = CollapseMenu;
 exports.default = _default;
 
-},{"react":142}],160:[function(require,module,exports){
+},{"react":142}],161:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44529,7 +44624,7 @@ function (_React$Component) {
 var _default = ItemCollapseMenu;
 exports.default = _default;
 
-},{"react":142,"react-router-dom":120}],161:[function(require,module,exports){
+},{"react":142,"react-router-dom":120}],162:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44585,7 +44680,7 @@ function (_React$Component) {
 var _default = Divider;
 exports.default = _default;
 
-},{"react":142}],162:[function(require,module,exports){
+},{"react":142}],163:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44645,7 +44740,7 @@ function (_React$Component) {
 var _default = Heading;
 exports.default = _default;
 
-},{"react":142}],163:[function(require,module,exports){
+},{"react":142}],164:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44706,7 +44801,7 @@ function (_React$Component) {
 var _default = SideBar;
 exports.default = _default;
 
-},{"react":142}],164:[function(require,module,exports){
+},{"react":142}],165:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44829,7 +44924,7 @@ function (_Component) {
 var _default = Login;
 exports.default = _default;
 
-},{"../services/AuthService.js":172,"react":142}],165:[function(require,module,exports){
+},{"../services/AuthService.js":173,"react":142}],166:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44889,7 +44984,7 @@ function (_Component) {
 var _default = pageContainer;
 exports.default = _default;
 
-},{"react":142}],166:[function(require,module,exports){
+},{"react":142}],167:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44951,7 +45046,7 @@ function (_Component) {
 var _default = pageHeading;
 exports.default = _default;
 
-},{"react":142}],167:[function(require,module,exports){
+},{"react":142}],168:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45059,7 +45154,7 @@ function (_Component) {
 var _default = contas;
 exports.default = _default;
 
-},{"../pageContent/pageContainer.jsx":165,"../pageContent/pageHeading.jsx":166,"react":142,"react-bootstrap-table":76}],168:[function(require,module,exports){
+},{"../pageContent/pageContainer.jsx":166,"../pageContent/pageHeading.jsx":167,"react":142,"react-bootstrap-table":76}],169:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45171,7 +45266,7 @@ function (_Component) {
 var _default = funcoes;
 exports.default = _default;
 
-},{"../../services/ServiceApiIntegrator.js":173,"../pageContent/pageContainer.jsx":165,"../pageContent/pageHeading.jsx":166,"react":142,"react-bootstrap-table":76}],169:[function(require,module,exports){
+},{"../../services/ServiceApiIntegrator.js":174,"../pageContent/pageContainer.jsx":166,"../pageContent/pageHeading.jsx":167,"react":142,"react-bootstrap-table":76}],170:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45185,11 +45280,15 @@ var _pageContainer = _interopRequireDefault(require("../pageContent/pageContaine
 
 var _pageHeading = _interopRequireDefault(require("../pageContent/pageHeading.jsx"));
 
+var _selectRole = _interopRequireDefault(require("../interface/selectRole.jsx"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -45199,13 +45298,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var register =
 /*#__PURE__*/
@@ -45218,11 +45317,32 @@ function (_Component) {
     _classCallCheck(this, register);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(register).call(this, props));
-    _this.state = {};
+    _this.state = {
+      message: "",
+      visible: "invisible",
+      data: {
+        userID: "",
+        Password: "",
+        email: "",
+        role: ""
+      }
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.criarNovaConta = _this.criarNovaConta.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(register, [{
+    key: "criarNovaConta",
+    value: function criarNovaConta() {
+      if (this.state.password != this.state.rpassword) {
+        this.setState({
+          visible: "visible"
+        });
+        return null;
+      } else {}
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement(_pageContainer.default, null, _react.default.createElement(_pageHeading.default, {
@@ -45232,6 +45352,8 @@ function (_Component) {
       }, _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("div", {
+        className: "alert alert-danger " + this.state.visible
+      }, _react.default.createElement("strong", null, "Aten\xE7\xE3o!"), " as senhas divergentes, favor digitar novamente!"), _react.default.createElement("div", {
         className: "col-lg-12"
       }, _react.default.createElement("div", {
         className: "p-lg-5"
@@ -45244,14 +45366,20 @@ function (_Component) {
       }, _react.default.createElement("input", {
         type: "text",
         className: "form-control form-control-user",
-        id: "exampleFirstName",
+        id: "username",
+        name: "username",
         placeholder: "UserName"
       }))), _react.default.createElement("div", {
+        className: "form-group row"
+      }, _react.default.createElement("div", {
+        className: "col-sm-6 mb-3 mb-sm-0"
+      }, _react.default.createElement(_selectRole.default, null))), _react.default.createElement("div", {
         className: "form-group"
       }, _react.default.createElement("input", {
         type: "email",
         className: "form-control form-control-user",
-        id: "exampleInputEmail",
+        id: "email",
+        name: "email",
         placeholder: "Email Address"
       })), _react.default.createElement("div", {
         className: "form-group row"
@@ -45260,19 +45388,24 @@ function (_Component) {
       }, _react.default.createElement("input", {
         type: "password",
         className: "form-control form-control-user",
-        id: "exampleInputPassword",
+        id: "password",
+        name: "password",
         placeholder: "Password"
       })), _react.default.createElement("div", {
         className: "col-sm-6"
       }, _react.default.createElement("input", {
         type: "password",
         className: "form-control form-control-user",
-        id: "exampleRepeatPassword",
-        placeholder: "Repeat Password"
-      }))), _react.default.createElement("a", {
-        href: "login.html",
+        id: "rpassword",
+        placeholder: "Repet Password"
+      }))), _react.default.createElement("div", {
         className: "btn btn-primary btn-user btn-block"
       }, "Registrar Nova Conta"), _react.default.createElement("hr", null))))))));
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
     }
   }]);
 
@@ -45282,7 +45415,7 @@ function (_Component) {
 var _default = register;
 exports.default = _default;
 
-},{"../pageContent/pageContainer.jsx":165,"../pageContent/pageHeading.jsx":166,"react":142}],170:[function(require,module,exports){
+},{"../interface/selectRole.jsx":158,"../pageContent/pageContainer.jsx":166,"../pageContent/pageHeading.jsx":167,"react":142}],171:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45334,7 +45467,9 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(registerRole).call(this, props));
     _this.state = {
-      roleName: ""
+      roleName: "",
+      apiCaller: new _ServiceApiIntegrator.default(),
+      data: ""
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.clickRegister = _this.clickRegister.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -45344,7 +45479,9 @@ function (_Component) {
   _createClass(registerRole, [{
     key: "clickRegister",
     value: function clickRegister(e) {
-      alert(this.state);
+      this.setState({
+        data: this.state.apiCaller.post("api/identity/create/role/" + this.state.roleName)
+      });
     }
   }, {
     key: "render",
@@ -45375,7 +45512,7 @@ function (_Component) {
       }))), _react.default.createElement("div", {
         className: "btn btn-primary btn-user btn-block",
         onClick: this.clickRegister
-      }, "Registrar Nova Conta"), _react.default.createElement("hr", null))))))));
+      }, "Registrar Nova Fun\xE7\xE3o (Role)"), _react.default.createElement("hr", null))))))));
     }
   }, {
     key: "handleChange",
@@ -45390,7 +45527,7 @@ function (_Component) {
 var _default = registerRole;
 exports.default = _default;
 
-},{"../../services/ServiceApiIntegrator.js":173,"../pageContent/pageContainer.jsx":165,"../pageContent/pageHeading.jsx":166,"react":142}],171:[function(require,module,exports){
+},{"../../services/ServiceApiIntegrator.js":174,"../pageContent/pageContainer.jsx":166,"../pageContent/pageHeading.jsx":167,"react":142}],172:[function(require,module,exports){
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -45414,7 +45551,7 @@ _reactDom.default.render(_react.default.createElement(_reactRouterDom.BrowserRou
   component: _login.default
 }))), document.getElementById('root'));
 
-},{"./components/app.jsx":152,"./components/login.jsx":164,"react":142,"react-dom":96,"react-router-dom":120}],172:[function(require,module,exports){
+},{"./components/app.jsx":152,"./components/login.jsx":165,"react":142,"react-dom":96,"react-router-dom":120}],173:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45568,7 +45705,7 @@ function () {
 var _default = AuthService;
 exports.default = _default;
 
-},{"jwt-decode":43}],173:[function(require,module,exports){
+},{"jwt-decode":43}],174:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45593,24 +45730,75 @@ function () {
     _classCallCheck(this, ServiceApiIntegrator);
 
     this.token = localStorage.getItem('id_token');
+    this.homeUrl = 'https://' + window.location.host + '/';
     this.api = _axios.default.create({
-      baseURL: 'https://' + window.location.host + '/' + apiCaller,
-      timeout: 1000,
+      baseURL: this.homeUrl,
       headers: {
-        'Autorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + this.token
       }
     });
-    this.getResponseData = this.getResponseData.bind(this);
+    this.get = this.get.bind(this);
+    this.post = this.post.bind(this);
+    this.postBodyData = this.postBodyData.bind(this);
+    this.processResponse = this.processResponse.bind(this);
+    this.getApi = this.getApi.bind(this);
   }
 
   _createClass(ServiceApiIntegrator, [{
-    key: "getResponseData",
-    value: function getResponseData(path) {
-      this.api.get(path).then(function (response) {
-        return response.data;
+    key: "getApi",
+    value: function getApi() {
+      return this.api;
+    }
+  }, {
+    key: "get",
+    value: function get(path) {
+      var _this = this;
+
+      this.api.get(this.homeUrl + path).then(function (response) {
+        return _this.processResponse(response);
       }).catch(function (error) {
+        alert(error.message);
         return error;
       });
+    }
+  }, {
+    key: "post",
+    value: function post(path) {
+      var _this2 = this;
+
+      this.api.post(this.homeUrl + path).then(function (response) {
+        return _this2.processResponse(response);
+      }).catch(function (error) {
+        alert(error.message);
+        return error;
+      });
+    }
+  }, {
+    key: "postBodyData",
+    value: function postBodyData(path, data) {
+      var _this3 = this;
+
+      this.api.post(this.homeUrl + path, data).then(function (response) {
+        return _this3.processResponse(response);
+      }).catch(function (error) {
+        alert(error.message);
+        return error;
+      });
+    }
+  }, {
+    key: "processResponse",
+    value: function processResponse(response) {
+      if (response.data.succeeded === true) {
+        alert("Ação executada com sucesso!");
+      } else if (response.data.succeeded === false) {
+        var result = "Erro! \n";
+        response.data.errors.forEach(function (item) {
+          result += item.code + "\n" + item.description + "\n";
+        });
+        alert(result);
+      } else {
+        return response.data;
+      }
     }
   }]);
 
@@ -45620,7 +45808,7 @@ function () {
 var _default = ServiceApiIntegrator;
 exports.default = _default;
 
-},{"axios":1}],174:[function(require,module,exports){
+},{"axios":1}],175:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45710,6 +45898,6 @@ function withAuth(AuthComponent) {
   );
 }
 
-},{"./AuthService.js":172,"react":142}]},{},[171])
+},{"./AuthService.js":173,"react":142}]},{},[172])
 
 //# sourceMappingURL=main.js.map
