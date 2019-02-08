@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import ContentPage from '../pageContent/pageContainer.jsx'
 import PageHeading from '../pageContent/pageHeading.jsx';
+import ApiCaller from '../../services/ServiceApiIntegrator.js'
+
 class registerRole extends Component {
     constructor(props) {
         super(props);
-        this.state = { };
+        this.state = { roleName: "" };
+        this.handleChange = this.handleChange.bind(this);
+        this.clickRegister = this.clickRegister.bind(this);
+    }
+
+    clickRegister(e){
+        alert(this.state);
     }
 
     render() {
@@ -19,12 +27,12 @@ class registerRole extends Component {
                                     <form className="user">
                                         <div className="form-group row">
                                             <div className="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" className="form-control form-control-user" id="exampleFirstName" placeholder="RoleName"></input>
+                                                <input type="text" className="form-control form-control-user" id="roleName" name="roleName" placeholder="RoleName" onChange={this.handleChange}></input>
                                             </div>
                                         </div>
-                                        <a href="login.html" className="btn btn-primary btn-user btn-block">
+                                        <div className="btn btn-primary btn-user btn-block" onClick={this.clickRegister}>
                                             Registrar Nova Conta
-                                        </a>
+                                        </div>
                                         <hr />
                                     </form>
                                 </div>
@@ -34,6 +42,14 @@ class registerRole extends Component {
                 </ContentPage>
             </div>
         );
+    }
+    
+    handleChange(e) {
+        this.setState(
+            {
+               [e.target.name]: e.target.value
+            }
+        )
     }
 }
 

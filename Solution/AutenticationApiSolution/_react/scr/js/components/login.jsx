@@ -33,8 +33,8 @@ class Login extends Component {
             <section className="background-login ">
                 <header className="masthead d-flex">
                     <div className="container text-center my-auto">
-                        <div id="box" class="card card-container">
-                            <p id="profile-name" class="profile-name-card"></p>
+                        <div id="box" className="card card-container">
+                            <p id="profile-name" className="profile-name-card"></p>
                             <h4 className="card-title text-info">Gerenciamento de APIs </h4>
                             <form>
                                 <br />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';   
 import ContentPage from '../pageContent/pageContainer.jsx';
 import PageHeading from '../pageContent/pageHeading.jsx';
-
+import ApiCaller from '../../services/ServiceApiIntegrator.js'
 var ReactBsTable = require('react-bootstrap-table');
 var BootstrapTable = ReactBsTable.BootstrapTable;
 var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
