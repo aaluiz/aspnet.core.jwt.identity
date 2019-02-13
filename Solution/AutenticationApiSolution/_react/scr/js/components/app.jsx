@@ -19,6 +19,7 @@ import Contas from './pages/contas.jsx';
 import Funcoes from './pages/funcoes.jsx';
 
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);

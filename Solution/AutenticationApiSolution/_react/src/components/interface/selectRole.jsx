@@ -7,7 +7,7 @@ class selectRole extends Component {
 
 
         this.state = {
-            caller: new ApiCalle(),
+            caller: new ApiCaller(),
             dados: []
         };
 
@@ -35,7 +35,7 @@ class selectRole extends Component {
             list.push(item.name)
         });
 
-        selectCore = list.map((func, index) => {
+       let selectCore = list.map((func, index) => {
             return (
                 <option key={index} value={func.name}>{func.name}</option>
             );
