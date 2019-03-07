@@ -160,12 +160,7 @@ namespace AuthenticationApiSolution
 
             app.UseAuthentication();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
-            });
+            app.UseMvc();
         }
     }
 }
